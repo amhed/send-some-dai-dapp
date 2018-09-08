@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { cancelLogin } from '../Reducers/login'
@@ -16,7 +15,7 @@ class SignOut extends React.Component {
   }
 
   render() {
-    return <div>Hello</div>
+    return <div>Signing Off...</div>
   }
 }
 
@@ -26,7 +25,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-export default withRouter(connect(
+export default connect(
   null,
   mapDispatchToProps
-)(SignOut))
+)(SignOut)
