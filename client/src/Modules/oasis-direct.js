@@ -8,6 +8,7 @@ var erc20contract = require('./erc20contract.json')
 var weth = web3.eth.contract(erc20contract).at(wethAddress)
 
 var daiAddress = '0xc4375b7de8af5a38a93548eb8453a498222c4ff2'
+var dai = web3.eth.contract(erc20contract).at(daiAddress)
 
 
 exports.buyDai = function (amount, cb) {
@@ -63,6 +64,28 @@ exports.buyWeth = function (val, cb) {
 }
 
 window.buyWeth = exports.buyWeth
+
+exports.transferDai = function (toAddr, amount, cb) {
+  var transactionHash
+  dai.transfer.sendTransaction(toAddr, amount, {
+    from: web3.eth.accounts[0],
+    gas:4000000
+  }, ontransfer)
+
+  function ontransfer (err, _transactionHash) {
+    if (err) return cb(err)
+    transactionHash = _transactionHash
+    web3.eth.getTransaction(transactionHash, ontransaction)
+  }
+
+  function ontransaction (err, transaction) {
+    if (err) return cb(err)
+    if (transaction && transaction.blockNumber) return cb(null, transactionHash)
+    setTimeout(() => web3.eth.getTransaction(transactionHash, ontransaction), 1000)
+  }
+}
+
+window.transferDai = exports.transferDai
 
 exports.checkApproval = function () {
 }
