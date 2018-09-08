@@ -1,0 +1,46 @@
+var oasisDesc = require('./odcontract.json')
+var oasisAddress = '0x8cf1cab422a0b6b554077a361f8419cdf122a9f9'
+var oasis = web3.eth.contract(oasisDesc).at(oasisAddress);
+
+var wethAddress = '0xd0a1e359811322d97991e03f863a0c30c2cf029c'
+var erc20contract = require('./erc20contract.json')
+var weth = web3.eth.contract(erc20contract).at(wethAddress)
+
+var daiAddress = '0xc4375b7de8af5a38a93548eb8453a498222c4ff2'
+
+exports.buyDai = function (amount, cb) {
+  var transactionHash
+  oasis.buyAllAmount.sendTransaction(daiAddress, amount, wethAddress, 500000000000000, {
+    from: web3.eth.accounts[0],
+    gas:4000000
+  }, onbuy)
+
+  function onbuy (err, _transactionHash) {
+    if (err) return cb(err)
+    transactionHash = _transactionHash
+    web3.eth.getTransaction(transactionHash, ontransaction)
+  }
+
+  function ontransaction (err, transaction) {
+    if (err) return cb(err)
+    if (transaction && transaction.blockNumber) return cb(null, transactionHash)
+    setTimeout(() => web3.eth.getTransaction(transactionHash, ontransaction), 1000)
+  }
+}
+
+window.buyDai = exports.buyDai
+
+exports.approveWeth = function () {
+  weth.approve.sendTransaction(oasisAddress, -1, {
+    from: web3.eth.accounts[0],
+    gas:4000000
+  }, function (err, res) {
+    console.log(err, res)
+  })
+}
+
+exports.buyWeth = function () {
+}
+
+exports.checkApproval = function () {
+}

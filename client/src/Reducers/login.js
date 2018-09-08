@@ -67,7 +67,6 @@ export const login = () => {
       const signature = await sign(nonce, account)
       const verification = await fetch(`/api/finish-login/${account}?signature=${signature}`, {credentials: 'include'})
         .then(x => x.json())
-      console.log(verification)
       if (verification.loggedIn) {
         dispatch(push('/send'))
         dispatch({
@@ -80,7 +79,7 @@ export const login = () => {
         type: CANCEL_LOGIN
       })
     }
-  }   
+  }
 }
 
 export const cancelLogin = () => {
