@@ -1,24 +1,16 @@
 {
   "name": "send-some-dai-dapp",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amhed/send-some-dai-dapp.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/amhed/send-some-dai-dapp/issues"
-  },
-  "homepage": "https://github.com/amhed/send-some-dai-dapp#readme",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "ethereumjs-util": "^5.2.0",
-    "express": "^4.16.3",
-    "web3": "^1.0.0-beta.36"
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
