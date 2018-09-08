@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="293" viewBox="0 0 1024 293">
+    <defs>
+        <style type="text/css">
+            @font-face {
+            font-family: Comfortaa-Bold;
+            src: url('/Fonts/Comfortaa-Bold.ttf');
+            }
+        </style>
+        <radialGradient id="c" cx="90.14%" cy="10.287%" r="485.544%" fx="90.14%" fy="10.287%" gradientTransform="matrix(.10832 .81278 -.15112 .58257 .82 -.69)">
+            <stop offset="0%" stop-color="#E876BD"/>
+            <stop offset="46.019%" stop-color="#B67BDB"/>
+            <stop offset="100%" stop-color="#957DEE"/>
+        </radialGradient>
+        <rect id="b" width="995" height="185" rx="10"/>
+        <filter id="a" width="118.8%" height="201.1%" x="-6.9%" y="-37%" filterUnits="objectBoundingBox">
+            <feOffset dx="25" dy="25" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="27"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.276862545 0"/>
+        </filter>
+        <path id="e" d="M577.544 0H985c5.523 0 10 4.477 10 10v165c0 5.523-4.477 10-10 10H396L577.544 0z"/>
+        <filter id="d" width="131.2%" height="201.1%" x="-11.4%" y="-37%" filterUnits="objectBoundingBox">
+            <feOffset dx="25" dy="25" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="27"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.276862545 0"/>
+        </filter>
+        <filter id="f" width="125.5%" height="182.7%" x="-8.6%" y="-27.8%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="16.5"/>
+            <feOffset dx="12" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.739951313 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero" transform="translate(15 29)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="url(#c)" xlink:href="#b"/>
+        </g>
+        <g fill-rule="nonzero" opacity=".147" transform="translate(15 29)">
+            <use fill="#000" filter="url(#d)" xlink:href="#e"/>
+            <use fill="#3E4C6E" xlink:href="#e"/>
+            <use fill="#000" filter="url(#f)" xlink:href="#e"/>
+        </g>
+        <text fill="#FFF" font-family="Comfortaa-Bold, Comfortaa" font-size="30" font-weight="bold" transform="translate(15 29)">
+            <tspan x="31" y="69">Send money simply, </tspan> <tspan x="31" y="110">anywhere,</tspan> <tspan x="31" y="151">to anyone.</tspan>
+        </text>
+        <text fill="#FFF" font-family="Comfortaa-Bold, Comfortaa" font-size="30" font-weight="bold" transform="translate(15 29)">
+            <tspan x="718" y="69">All you need is </tspan> <tspan x="877.54" y="115">ETH</tspan>
+        </text>
+        <g fill-rule="nonzero" stroke="#FFF" stroke-dasharray="21,14" stroke-linecap="round" stroke-width="5">
+            <path d="M513 124c0 30.376 24.848 55 55.5 55s55.5-24.624 55.5-55M402 125c0-30.376 24.848-55 55.5-55S513 94.624 513 125"/>
+        </g>
+        <path fill="#FFF" fill-rule="nonzero" d="M616.55 128h15.9a1 1 0 0 0 .911-1.412l-7.95-17.574a1 1 0 0 0-1.822 0l-7.95 17.574a1 1 0 0 0 .91 1.412z"/>
+        <g fill="#FFF" fill-rule="nonzero">
+            <path d="M392.313 151.154l8.758 4.756a1 1 0 0 0 .956 0l8.711-4.756a1 1 0 0 0 .365-1.414l-8.712-13.707a1 1 0 0 0-1.687-.002l-8.757 13.706a1 1 0 0 0 .366 1.417zM401.793 168.873l6.963-10.01a1 1 0 0 0-1.283-1.458l-6.044 3.147a1 1 0 0 1-.933-.005l-5.825-3.11a1 1 0 0 0-1.298 1.444l6.771 9.982a1 1 0 0 0 1.649.01z"/>
+        </g>
+    </g>
+</svg>

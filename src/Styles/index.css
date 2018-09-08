@@ -1,5 +1,42 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  color: #ffffff;
+  font-family: 'Comfortaa';
+  font-size: 19px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  background-image: radial-gradient(circle at 59% 43%, #3c486a, #262f49);
+}
+
+.App-logo {
+  background-image: url(/img/logo-white.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 107px;
+  height: 86px;
+}
+
+.App header .menu-items {
+  margin-top: 30px;
+}
+
+.App header .menu-item {
+  width: 72px;
+  height: 25px;
+  margin: 20px 15px 0 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
 }

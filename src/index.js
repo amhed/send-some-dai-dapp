@@ -11,6 +11,7 @@ import store, { history } from './store-index'
 // App entry point
 import App from './Containers/app-index'
 
+import './Styles/flexboxgrid.css'
 import './Styles/index.css'
 
 const target = document.querySelector('#root')

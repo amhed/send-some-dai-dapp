@@ -2,23 +2,25 @@ import React from 'react'
 import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  login,
-  cancelLogin
-} from '../Reducers/login'
+import { login, cancelLogin } from '../Reducers/login'
+
+import sendMoneyBanner from '../Styles/Svg/send-money-banner.svg'
 
 const Home = props => (
   <div>
-    <h1>Home</h1>
+    <div className="col-xs-12 center">
+    </div>
+
+    <img src={sendMoneyBanner} alt="All you need is ETH" />
 
     <p>
       <button onClick={props.login}>Login</button>
     </p>
 
     <p>
-      Current State <br/><br/>
-
-      Login Requested: {props.loginRequested.toString()} <br/>
+      Current State <br />
+      <br />
+      Login Requested: {props.loginRequested.toString()} <br />
       Account Address: {props.accountAddress}
     </p>
 
@@ -31,11 +33,15 @@ const mapStateToProps = ({ login }) => ({
   accountAddress: login.accountAddress
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  login,
-  cancelLogin,
-  changePage: () => push('/about-us')
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      login,
+      cancelLogin,
+      changePage: () => push('/about-us')
+    },
+    dispatch
+  )
 
 export default connect(
   mapStateToProps,
