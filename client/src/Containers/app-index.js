@@ -7,8 +7,9 @@ import Home from './home'
 import About from './about'
 import SendMoney from './send-money'
 import SignOut from './signout'
-import ConfirmTransaction from './confirm-transaction'
-import Execution from './execution'
+import TransactionCommit from './transaction-commit'
+import TransactionExecution from './transaction-execution'
+import TransactionComplete from './transaction-complete'
 
 const App = props => (
   <div className="App">
@@ -37,8 +38,9 @@ const App = props => (
       <Route exact path="/sign-out" component={SignOut} />
       <Route exact path="/send" component={SendMoney} /> 
       <Route exact path="/about" component={About} /> 
-      <Route exact path="/confirm" component={ConfirmTransaction} /> 
-      <Route exact path="/execution" component={Execution} /> 
+      <Route exact path="/confirm" component={TransactionCommit} /> 
+      <Route exact path="/execution" component={TransactionExecution} /> 
+      <Route exact path="/complete" component={TransactionComplete} /> 
     </Switch>
   </div>
 )

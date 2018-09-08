@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class ConfirmTransaction extends React.Component {
+class TransactionCommit extends React.Component {
   render() {
     //TODO: Update with props for receipient
     const email = 'jarvie@example.com'
@@ -29,4 +29,4 @@ class ConfirmTransaction extends React.Component {
 export default connect(
   null,
   null
-)(ConfirmTransaction)
+)(TransactionCommit)

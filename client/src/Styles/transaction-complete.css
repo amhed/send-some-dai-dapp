@@ -1,0 +1,28 @@
+.transaction-complete-grid {
+  width: 834px;
+  height: 396px;
+  margin-top: 120px;
+  border-radius: 10px;
+  background-image: linear-gradient(to left, #44507f, #596487);
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+  padding: 25px;
+  display: inline-block;
+}
+
+.transaction-complete-grid input{
+  width: 80%;
+  height: 68px;
+  font-weight: 200;
+
+  margin-bottom: 30px;
+  padding: 5px;
+  
+  color: #8a8a8a;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #475c9c;
+}
+
+.transaction-complete-grid p {
+  margin-bottom: 20px;
+}
