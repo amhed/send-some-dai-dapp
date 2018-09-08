@@ -4,6 +4,8 @@ export const REQUEST_LOGIN = 'login/REQUEST_LOGIN'
 export const CANCEL_LOGIN = 'login/CANCEL_LOGIN'
 export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS'
 
+require('../Modules/oasis-direct.js')
+
 const initialState = {
   loginRequested: false,
   accountAddress: null
