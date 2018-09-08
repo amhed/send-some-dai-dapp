@@ -42,9 +42,9 @@ const App = props => {
         <Route exact path="/send" component={SendMoney} /> 
         <Route exact path="/about" component={About} /> 
   
-        {loggedIn && <Route exact path="/confirm" component={TransactionCommit} />}
-        {loggedIn && <Route exact path="/execution" component={TransactionExecution} /> } 
-        {loggedIn && <Route exact path="/complete" component={TransactionComplete} /> }
+        {/*loggedIn && */<Route exact path="/confirm" component={TransactionCommit} />}
+        {/*loggedIn && */<Route exact path="/execution" component={TransactionExecution} /> } 
+        {/*loggedIn && */<Route exact path="/complete" component={TransactionComplete} /> }
       </Switch>
     </div>
   )

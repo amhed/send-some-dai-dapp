@@ -2,18 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { approveWeth, wrapWeth } from '../Reducers/execution'
+import { execute } from '../Reducers/execution'
 
 import '../Styles/transaction-execution.css'
 
 class Execution extends React.Component {
-  render() {
-    if (this.props.wethApproval === 'inactive') {
-      this.props.approveWeth()
-    } else if (this.props.wethWrapping === 'inactive') {
-      this.props.wrapWeth(100000000)
-    }
 
+  constructor (props) {
+    super(props)
+    props.execute(props.ethAmountToSend * (Math.pow(10,18)), props.usdAmountToSend * props.daiToUsd)
+  }
+
+  render() {
     return <div>
       <div className="row-center">
         <h1>Executing operation</h1>
@@ -37,20 +37,22 @@ class Execution extends React.Component {
   }
 }
 
-const mapStateToProps = ({ execution }) => ({
+const mapStateToProps = ({ execution, ethOperations, constants }) => ({
   wethApproval: execution.wethApproval,
   wethWrapping: execution.wethWrapping,
   daiExchange: execution.daiExchange,
   disposableWallet: execution.disposableWallet,
   daiSending: execution.daiSending,
-  recipientNotification: execution.recipientNotification
+  recipientNotification: execution.recipientNotification,
+  ethAmountToSend: ethOperations.ethAmountToSend,
+  usdAmountToSend: ethOperations.usdAmountToSend,
+  daiToUsd: constants.DAI_TO_USD
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      approveWeth,
-      wrapWeth
+      execute
     },
     dispatch
   )
