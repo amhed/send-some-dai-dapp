@@ -1,10 +1,12 @@
 import { getEtherPrice } from '../Modules/coinmarketcap'
 
 export const REFRESH_ETH_PRICE = 'REFRESH_ETH_PRICE'
+export const UPDATE_AMOUNT_TO_SEND = 'UPDATE_AMOUNT_TO_SEND'
 
 const initialState = {
   walletLimitUsd: 60,
-  walletLimitEth: null
+  walletLimitEth: null,
+  ethAmountToSend: 0
 }
 
 export default (state = initialState, action) => {
@@ -13,6 +15,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         walletLimitEth: action.price
+      }
+
+    case UPDATE_AMOUNT_TO_SEND:
+      return {
+        ...state,
+        ethAmountToSend: action.ethAmount
       }
 
     default:
@@ -26,6 +34,15 @@ export const refreshEthPrice = () => {
     dispatch({
       type: REFRESH_ETH_PRICE,
       price
+    })
+  }
+}
+
+export const updateAmountToSend = (ethAmount) => {
+  return async dispatch => {
+    dispatch({
+      type: UPDATE_AMOUNT_TO_SEND,
+      ethAmount
     })
   }
 }

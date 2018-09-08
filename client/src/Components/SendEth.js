@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-import { refreshEthPrice } from '../Reducers/eth-operations'
+import { refreshEthPrice, updateAmountToSend } from '../Reducers/eth-operations'
 
 export class SendEth extends React.Component {
   constructor(props) {
     super(props)
+
+    // Refresh ether price on load
     props.refreshEthPrice()
   }
 
@@ -22,7 +24,10 @@ export class SendEth extends React.Component {
           <div className="send-money-grid">
             <h1>Send money now</h1>
 
-            <input type="number" className="currency-input"/>
+            <input type="number" className="currency-input" 
+              value={this.props.ethAmount}
+              onChange={(event) => this.props.updateAmountToSend(event.target.value)}
+              />
             <button className="button-cta-narrow">Continue</button>
 
             <p className="subtitle">
@@ -37,11 +42,15 @@ export class SendEth extends React.Component {
 
 const mapStateToProps = ({ ethOperations }) => ({
   limitPerWalletUsd: ethOperations.walletLimitUsd,
-  limitPerWalletEth: ethOperations.walletLimitEth
+  limitPerWalletEth: ethOperations.walletLimitEth,
+  ethAmount: ethOperations.ethAmount
 })
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ refreshEthPrice },
+  bindActionCreators({
+    refreshEthPrice,
+    updateAmountToSend
+  },
     dispatch
   )
 
