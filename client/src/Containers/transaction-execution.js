@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import '../Styles/execution.css'
+import '../Styles/transaction-execution.css'
 
 class Execution extends React.Component {
   render() {
