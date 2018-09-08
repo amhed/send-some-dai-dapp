@@ -2,11 +2,12 @@ const express = require('express')
 const mongojs = require('mongojs')
 const ethUtil = require('ethereumjs-util')
 const session = require('express-session')
-const web3 = require('web3')
 const wallet = require('ethereumjs-wallet')
 
 const app = express()
 const port = process.env.PORT || 5000
+
+app.use(express.static('/build'))
 
 const db = mongojs(
   'mongodb://app:sendsomedai1@ds149732.mlab.com:49732/send-some-dai',
