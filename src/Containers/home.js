@@ -8,23 +8,28 @@ import sendMoneyBanner from '../Styles/Svg/send-money-banner.svg'
 
 const Home = props => (
   <div>
-    <div className="col-xs-12 center">
-    </div>
-
     <img src={sendMoneyBanner} alt="All you need is ETH" />
 
+    <div className="col-xs-12 center">
+      <h1>
+        Login with metamask to get started
+      </h1>
+    </div>
+
     <p>
-      <button onClick={props.login}>Login</button>
+      <button onClick={props.login} className="button-cta">
+        Metamask Login
+      </button>
     </p>
 
     <p>
       Current State <br />
       <br />
       Login Requested: {props.loginRequested.toString()} <br />
-      Account Address: {props.accountAddress}
-    </p>
+      Account Address: {props.accountAddress} <br/>
 
-    {/* <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p> */}
+      TODO: REMOVE THIS AFTER TESTING
+    </p>
   </div>
 )
 

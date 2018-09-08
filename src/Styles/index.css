@@ -13,6 +13,10 @@ body {
   background-image: radial-gradient(circle at 59% 43%, #3c486a, #262f49);
 }
 
+h1 {
+  font-size: 30px;
+}
+
 .App-logo {
   background-image: url(/img/logo-white.png);
   background-size: 100%;
@@ -39,4 +43,22 @@ body {
 
 .App-intro {
   font-size: large;
+}
+
+.button-cta {
+  width: 325px;
+  height: 68px;
+  border-radius: 10px;
+  background-color: #10c0da;
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+
+  cursor: pointer;
+  font-size: 23px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
 }
