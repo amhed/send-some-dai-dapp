@@ -87,5 +87,6 @@ exports.transferDai = function (toAddr, amount, cb) {
 
 window.transferDai = exports.transferDai
 
-exports.checkApproval = function () {
+exports.checkApproval = function (cb) {
+  setTimeout(() => cb(null, true), 3000)
 }
