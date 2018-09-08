@@ -5,3 +5,15 @@ export const goToIndex = () => {
     dispatch(push('/'))
   }
 }
+
+export const goToConfirmation = () => {
+  return dispatch => {
+    dispatch(push('/confirm'))
+  }
+}
+
+export const goToTransactionExecution = () => {
+  return dispatch => {
+    dispatch(push('/execution'))
+  }
+}

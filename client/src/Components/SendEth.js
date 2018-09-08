@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 
 import { refreshEthPrice, updateAmountToSend } from '../Reducers/eth-operations'
+import { goToConfirmation } from '../Reducers/navigation'
 
 export class SendEth extends React.Component {
   constructor(props) {
@@ -14,21 +15,31 @@ export class SendEth extends React.Component {
   }
 
   render() {
-    const walletLimitEth = this.props.limitPerWalletEth
-      ? this.props.limitPerWalletEth.toFixed(2)
+    const walletLimitEth = this.props.walletLimitEth
+      ? this.props.walletLimitEth.toFixed(2)
       : ''
 
-    return (
+    const amountValid = this.props.usdAmountToSend <= this.props.walletLimitUsd
+    const inputClassName = amountValid 
+      ? 'currency-input '
+      : 'currency-input invalid-input'
+
+  return (
       <div className="row-middle-xs">
         <div className="col-xs-12 center">
           <div className="send-money-grid">
             <h1>Send money now</h1>
 
-            <input type="number" className="currency-input" 
-              value={this.props.ethAmount}
+            <input type="number"
+              className={inputClassName} 
+              value={this.props.usdAmountToSend}
               onChange={(event) => this.props.updateAmountToSend(event.target.value)}
               />
-            <button className="button-cta-narrow">Continue</button>
+            
+            <button className="button-cta-narrow" disabled={!amountValid}
+              onClick={this.props.goToConfirmation}>
+              Continue
+            </button>
 
             <p className="subtitle">
               You may only spend a maximum of {walletLimitEth} ETH (${this.props.walletLimitUsd} USD)
@@ -41,15 +52,17 @@ export class SendEth extends React.Component {
 }
 
 const mapStateToProps = ({ ethOperations }) => ({
-  limitPerWalletUsd: ethOperations.walletLimitUsd,
-  limitPerWalletEth: ethOperations.walletLimitEth,
-  ethAmount: ethOperations.ethAmount
+  walletLimitUsd: ethOperations.walletLimitUsd,
+  walletLimitEth: ethOperations.walletLimitEth,
+  ethAmountToSend: ethOperations.ethAmountToSend,
+  usdAmountToSend: ethOperations.usdAmountToSend
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({
     refreshEthPrice,
-    updateAmountToSend
+    updateAmountToSend,
+    goToConfirmation
   },
     dispatch
   )

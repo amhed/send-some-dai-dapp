@@ -6,7 +6,9 @@ export const UPDATE_AMOUNT_TO_SEND = 'UPDATE_AMOUNT_TO_SEND'
 const initialState = {
   walletLimitUsd: 60,
   walletLimitEth: null,
-  ethAmountToSend: 0
+  ethPrice: null,
+  ethAmountToSend: 0,
+  usdAmountToSend: ''
 }
 
 export default (state = initialState, action) => {
@@ -14,13 +16,15 @@ export default (state = initialState, action) => {
     case REFRESH_ETH_PRICE:
       return {
         ...state,
-        walletLimitEth: action.price
+        ethPrice: action.price,
+        walletLimitEth: state.walletLimitUsd / action.price
       }
 
     case UPDATE_AMOUNT_TO_SEND:
       return {
         ...state,
-        ethAmountToSend: action.ethAmount
+        usdAmountToSend: action.usdAmount,
+        ethAmountToSend: action.usdAmount / state.ethPrice
       }
 
     default:
@@ -38,11 +42,11 @@ export const refreshEthPrice = () => {
   }
 }
 
-export const updateAmountToSend = (ethAmount) => {
+export const updateAmountToSend = (usdAmount) => {
   return async dispatch => {
     dispatch({
       type: UPDATE_AMOUNT_TO_SEND,
-      ethAmount
+      usdAmount
     })
   }
 }
