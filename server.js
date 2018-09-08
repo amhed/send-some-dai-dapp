@@ -30,7 +30,6 @@ app.get('/ses', (req, res) => {
 app.get('/api/start-login/:username', (req, res) => {
   var randomNumber 
 
-  console.log(req.session, req.session.loggedIn)
   if (req.session.loggedIn) return res.send({loggedIn: true})
   db.users.findOne({username: req.params.username}, onuser)
 
@@ -76,7 +75,6 @@ app.get('/api/finish-login/:username', (req, res) => {
     var addressBuffer = ethUtil.publicToAddress(publicKey)
     var address = ethUtil.bufferToHex(addressBuffer)
     if (address.toLowerCase() === req.query.address.toLowerCase()) {
-      console.log('SESSION BABY!')
       req.session.loggedIn = true
       res.send({loggedIn: true})
     } else {
