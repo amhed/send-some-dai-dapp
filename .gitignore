@@ -72,3 +72,6 @@ typings/
 # Serverless directories
 .serverlessclient/package-lock.json
 package-lock.json
+
+# Heroku build folder
+client/build
