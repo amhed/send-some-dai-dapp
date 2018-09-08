@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import Home from './home'
 import About from './about'
+import SendMoney from './send-money'
 
 const App = () => (
   <div className="App">
@@ -19,6 +20,7 @@ const App = () => (
 
     <main>
       <Route exact path="/" component={Home} />
+      <Route exact path="/send" component={SendMoney} /> 
       <Route exact path="/about" component={About} /> 
     </main>
   </div>

@@ -1,11 +1,11 @@
 import React from 'react'
-import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { login, cancelLogin } from '../Reducers/login'
 
 import sendMoneyBanner from '../Styles/Svg/send-money-banner.svg'
 
+//TODO: Fetch to the server on load if user connected
 const Home = props => (
   <div>
     <img src={sendMoneyBanner} alt="All you need is ETH" />
@@ -21,15 +21,6 @@ const Home = props => (
         Metamask Login
       </button>
     </p>
-
-    <p>
-      Current State <br />
-      <br />
-      Login Requested: {props.loginRequested.toString()} <br />
-      Account Address: {props.accountAddress} <br/>
-
-      TODO: REMOVE THIS AFTER TESTING
-    </p>
   </div>
 )
 
@@ -42,8 +33,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       login,
-      cancelLogin,
-      changePage: () => push('/about-us')
+      cancelLogin
     },
     dispatch
   )

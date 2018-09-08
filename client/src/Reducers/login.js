@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 export const REQUEST_LOGIN = 'login/REQUEST_LOGIN'
 export const CANCEL_LOGIN = 'login/CANCEL_LOGIN'
 export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS'
@@ -35,15 +37,6 @@ export default (state = initialState, action) => {
   }
 }
 
-const callApi = async () => {
-  const response = await fetch('/api/hello')
-  const body = await response.json()
-
-  if (response.status !== 200) throw Error(body.message)
-
-  return body;
-}
-
 export const login = () => {
   return async dispatch => {
     dispatch({
@@ -67,6 +60,8 @@ export const login = () => {
           type: LOGIN_SUCCESS,
           accountAddress: account
         })
+
+        dispatch(push('/send'))
       }
     })
   }   
