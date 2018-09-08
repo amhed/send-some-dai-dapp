@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const mongojs = require('mongojs')
 const ethUtil = require('ethereumjs-util')
@@ -6,8 +7,6 @@ const wallet = require('ethereumjs-wallet')
 
 const app = express()
 const port = process.env.PORT || 5000
-
-app.use(express.static('/build'))
 
 const db = mongojs(
   'mongodb://app:sendsomedai1@ds149732.mlab.com:49732/send-some-dai',
@@ -109,10 +108,10 @@ app.get('/api/create-disposable-wallet', (req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, 'client/public')));
   // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
   });
 }
 
