@@ -1,6 +1,8 @@
 import React from 'react'
 import { Route, Link, Switch } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+
 
 import Home from './home'
 import About from './about'
@@ -42,7 +44,7 @@ const mapStateToProps = state => ({
   accountAddress: state.login.accountAddress
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   null
-)(App)
+)(App))
