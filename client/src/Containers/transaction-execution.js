@@ -27,7 +27,7 @@ class Execution extends React.Component {
             <li className={this.props.daiExchange}>Exchanging WETH for Dai</li>
             <li className={this.props.disposableWallet}>Creating disposable wallet</li>
             <li className={this.props.daiSending}>Sending Dai</li>
-            <li className={this.props.recipientNotification}>Notifying Recipient</li>
+            <li className={this.props.finishingUp}>Finishing up</li>
           </ul>
 
           <div>&nbsp;</div>
@@ -43,7 +43,7 @@ const mapStateToProps = ({ execution, ethOperations, constants }) => ({
   daiExchange: execution.daiExchange,
   disposableWallet: execution.disposableWallet,
   daiSending: execution.daiSending,
-  recipientNotification: execution.recipientNotification,
+  finishingUp: execution.finishingUp,
   ethAmountToSend: ethOperations.ethAmountToSend,
   usdAmountToSend: ethOperations.usdAmountToSend,
   daiToUsd: constants.DAI_TO_USD

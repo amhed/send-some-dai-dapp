@@ -1,4 +1,5 @@
 import oasis from '../Modules/oasis-direct.js'
+import { push } from 'react-router-redux'
 
 export const WETH_APPROVAL_STARTED = 'execution/WETH_APPROVAL_STARTED'
 export const WETH_APPROVAL_ERRORED = 'execution/WETH_APPROVAL_ERRORED'
@@ -15,6 +16,10 @@ export const DISPOSABLE_WALLET_CREATED = 'execution/DISPOSABLE_WALLET_CREATED'
 export const DAI_SENDING_STARTED = 'execution/DAI_SENDING_STARTED'
 export const DAI_SENDING_ERRORED = 'execution/DAI_SENDING_ERRORED'
 export const DAI_SENT = 'execution/DAI_SENT'
+export const FINISHING_UP_STARTED = 'execution/FINISHING_UP_STARTED'
+export const FINISHING_UP_ERRORED = 'execution/FINISHING_UP_ERRORED'
+export const FINISHED_UP = 'execution/FINISHED_UP'
+export const UPDATE_WALLET_ID = 'execution/UPDATE_WALLET_ID'
 
 const initialState = {
   wethApproval: 'inactive',
@@ -22,7 +27,8 @@ const initialState = {
   daiExchange: 'inactive',
   disposableWallet: 'inactive',
   daiSending: 'inactive',
-  recipientNotification: 'inactive'
+  finishingUp: 'inactive',
+  walletDbId: ''
 }
 
 export default (state = initialState, action) => {
@@ -118,6 +124,30 @@ export default (state = initialState, action) => {
         daiSending: 'done'
       }
 
+    case FINISHING_UP_STARTED:
+      return {
+        ...state,
+        finishingUp: 'active'
+      }
+
+    case FINISHING_UP_ERRORED:
+      return {
+        ...state,
+        finishingUp: 'error'
+      }
+
+    case FINISHED_UP:
+      return {
+        ...state,
+        finishingUp: 'done'
+      }
+
+    case UPDATE_WALLET_ID:
+      return {
+        ...state,
+        walletDbId: action.walletDbId
+      }
+
     default:
       return state
   }
@@ -156,13 +186,16 @@ export const execute = (ethAmount, usdAmount) => {
       if (err) return dispatch({ type: DISPOSABLE_WALLET_CREATION_ERRORED })
       dispatch({ type: DISPOSABLE_WALLET_CREATED})
       dispatch({ type: DAI_SENDING_STARTED})
-      console.log(wallet)
+      dispatch({ type: UPDATE_WALLET_ID, walletDbId: wallet._id})
       oasis.transferDai(wallet.address, usdAmount, ontransfer)
     }
 
     function ontransfer (err) {
       if (err) dispatch({ type: DAI_SENDING_ERRORED})
       dispatch({ type: DAI_SENT})
+      dispatch({ type: FINISHING_UP_STARTED})
+      setTimeout(() => dispatch({ type: FINISHED_UP}), 500)
+      setTimeout(() => dispatch(push('/complete')), 1500)
     }
   }
 }
