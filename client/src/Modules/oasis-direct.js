@@ -13,7 +13,7 @@ var dai = web3.eth.contract(erc20contract).at(daiAddress)
 
 exports.buyDai = function (amount, cb) {
   var transactionHash
-  oasis.buyAllAmount.sendTransaction(daiAddress, amount, wethAddress, 500000000000000, {
+  oasis.buyAllAmount.sendTransaction(daiAddress, amount, wethAddress, 500000000000000000000, {
     from: web3.eth.accounts[0],
     gas:4000000
   }, onbuy)
