@@ -1,8 +1,8 @@
+const path = require('path')
 const express = require('express')
 const mongojs = require('mongojs')
 const ethUtil = require('ethereumjs-util')
 const session = require('express-session')
-const web3 = require('web3')
 const wallet = require('ethereumjs-wallet')
 
 const app = express()
@@ -105,5 +105,12 @@ app.get('/api/create-disposable-wallet', (req, res) => {
     res.send(wlt)
   }
 })
+
+// Serve any static files
+app.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React app
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
