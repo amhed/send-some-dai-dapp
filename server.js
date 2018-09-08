@@ -27,19 +27,22 @@ app.get('/ses', (req, res) => {
   res.send(req.session.test)
 })
 
-app.get('/api/start-login/:username', (req, res) => {
+app.get('/api/start-login/:address', (req, res) => {
   var randomNumber 
 
   if (req.session.loggedIn) return res.send({loggedIn: true})
-  db.users.findOne({username: req.params.username}, onuser)
+  db.users.findOne({address: req.params.address}, onuser)
 
   function onuser (err, user) {
     if (err) return res.status(500).send({error: err})
-    if (!user) return res.status(404).send({error: 'user not found'})
+    if (!user) return db.users.insert({address: req.params.address}, oninsert)
+    oninsert(null, user)
+  }
 
+  function oninsert (err, user) {
     randomNumber = Math.floor(Math.random() * 1000000).toString()
     db.users.update({
-      username: req.params.username
+      address: req.params.address
     }, {
       $set: {nonce: `Hey, I'm logging in to send-some-dai with ${randomNumber}`}
     }, onupdate)
@@ -47,7 +50,7 @@ app.get('/api/start-login/:username', (req, res) => {
 
   function onupdate (err) {
     if (err) return res.status(500).send({error: err})
-    db.users.findOne({username: req.params.username}, onuseragain)
+    db.users.findOne({address: req.params.address}, onuseragain)
   }
 
   function onuseragain (err, user) {
@@ -56,8 +59,8 @@ app.get('/api/start-login/:username', (req, res) => {
   }
 })
 
-app.get('/api/finish-login/:username', (req, res) => {
-  db.users.findOne({username: req.params.username}, onuser)
+app.get('/api/finish-login/:address', (req, res) => {
+  db.users.findOne({address: req.params.address}, onuser)
 
   function onuser (err, user) {
     if (err) return res.status(500).send({error: err})
@@ -74,7 +77,7 @@ app.get('/api/finish-login/:username', (req, res) => {
 
     var addressBuffer = ethUtil.publicToAddress(publicKey)
     var address = ethUtil.bufferToHex(addressBuffer)
-    if (address.toLowerCase() === req.query.address.toLowerCase()) {
+    if (address.toLowerCase() === user.address.toLowerCase()) {
       req.session.loggedIn = true
       res.send({loggedIn: true})
     } else {

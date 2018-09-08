@@ -55,7 +55,7 @@ export const login = () => {
     try {
       const web3 = window.web3 || {}
       const account = web3.eth.accounts[0]
-      const user = await fetch('/api/start-login/ed', {credentials: 'include'}).then(x => x.json())
+      const user = await fetch('/api/start-login/' + account, {credentials: 'include'}).then(x => x.json())
       if (user.loggedIn) {
         dispatch(push('/send'))
         dispatch({
@@ -65,7 +65,7 @@ export const login = () => {
       }
       const nonce = user.nonce
       const signature = await sign(nonce, account)
-      const verification = await fetch(`/api/finish-login/ed?signature=${signature}&address=${account}`, {credentials: 'include'})
+      const verification = await fetch(`/api/finish-login/${account}?signature=${signature}`, {credentials: 'include'})
         .then(x => x.json())
       console.log(verification)
       if (verification.loggedIn) {
