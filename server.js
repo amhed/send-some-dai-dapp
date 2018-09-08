@@ -2,11 +2,16 @@ const express = require('express')
 const mongojs = require('mongojs')
 const ethUtil = require('ethereumjs-util')
 const session = require('express-session')
+const web3 = require('web3')
+const wallet = require('ethereumjs-wallet')
 
 const app = express()
 const port = process.env.PORT || 5000
 
-const db = mongojs('mongodb://app:sendsomedai1@ds149732.mlab.com:49732/send-some-dai', ['users'])
+const db = mongojs(
+  'mongodb://app:sendsomedai1@ds149732.mlab.com:49732/send-some-dai',
+  ['users', 'disposableWallets']
+)
 
 app.use(session({
   secret: 'my name is ed and I am awesome',
@@ -83,6 +88,21 @@ app.get('/api/finish-login/:address', (req, res) => {
     } else {
       res.send({loggedIn: false})
     }
+  }
+})
+
+app.get('/api/create-disposable-wallet', (req, res) => {
+  const dwallet = wallet.generate()
+
+  db.disposableWallets.insert({
+    pubKey: `0x${dwallet.pubKey.toString('hex')}`,
+    privKey: `0x${dwallet.privKey.toString('hex')}`,
+    address: dwallet.getAddressString()
+  }, oninsert)
+
+  function oninsert (err, wlt) {
+    if (err) return res.status(500).send({error: err})
+    res.send(wlt)
   }
 })
 
