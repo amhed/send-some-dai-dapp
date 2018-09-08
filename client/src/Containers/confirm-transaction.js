@@ -2,10 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 class ConfirmTransaction extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     //TODO: Update with props for receipient
     const email = 'jarvie@example.com'

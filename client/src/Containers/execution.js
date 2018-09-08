@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import '../Styles/execution.css'
 
 class Execution extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return <div>
       <div className="row-center">
