@@ -1,0 +1,23 @@
+.execution-list {
+  text-align: left;
+}
+
+ul li {
+  list-style-position: outside;
+}
+
+ul li.active {
+  list-style-image: url(/img/transfer.gif);
+}
+
+ul li.done {
+  list-style-image: url(/img/icon-check.png);
+}
+
+ul li.error {
+  list-style-image: url(/img/icon-x.png);
+}
+
+ul li.inactive {
+  color: #92969c
+}

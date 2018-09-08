@@ -3,11 +3,12 @@ import { Route, Link, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-
 import Home from './home'
 import About from './about'
 import SendMoney from './send-money'
 import SignOut from './signout'
+import ConfirmTransaction from './confirm-transaction'
+import Execution from './execution'
 
 const App = props => (
   <div className="App">
@@ -36,6 +37,8 @@ const App = props => (
       <Route exact path="/sign-out" component={SignOut} />
       <Route exact path="/send" component={SendMoney} /> 
       <Route exact path="/about" component={About} /> 
+      <Route exact path="/confirm" component={ConfirmTransaction} /> 
+      <Route exact path="/execution" component={Execution} /> 
     </Switch>
   </div>
 )
