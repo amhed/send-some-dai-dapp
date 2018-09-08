@@ -13,6 +13,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type){
     case NETWORK_CHANGE:
+      // Don't modify state if id is the same
+      if (action.networkVersion == state.networkVersion)
+        return state
+
       return {
         ...state,
         networkVersion: action.networkVersion

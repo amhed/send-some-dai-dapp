@@ -16,6 +16,9 @@ import TransactionCommit from './transaction-commit'
 import TransactionExecution from './transaction-execution'
 import TransactionComplete from './transaction-complete'
 
+// Components
+import NetworkCheck from '../Components/NetworkCheck'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -26,6 +29,10 @@ class App extends React.Component {
       this.props.networkChange(networkVersion)
     })
 
+    this._setupMetamaskEventListeners(web3)
+  }
+
+  _setupMetamaskEventListeners(web3) {
     // Listener for future network changes
     // (some older versions of metamask don't refresh the screen)
     web3.currentProvider.publicConfigStore.on('update', res => {
@@ -38,6 +45,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <NetworkCheck>
           <header>
             <div className="row">
               <div className="col-xs-3">
@@ -68,8 +76,9 @@ class App extends React.Component {
             {/*loggedIn && */<Route exact path="/confirm" component={TransactionCommit} />}
             {/*loggedIn && */<Route exact path="/execution" component={TransactionExecution} /> } 
             {/*loggedIn && */<Route exact path="/complete" component={TransactionComplete} /> }
-          </Switch>
-        </div>
+          </Switch>  
+        </NetworkCheck>    
+      </div>
       )
   }
 }
@@ -85,12 +94,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
-<<<<<<< HEAD
-  null
-)(App))
-=======
   mapDispatchToProps
-)(App))
->>>>>>> Detecting networtk
+)(withRouter(App))
