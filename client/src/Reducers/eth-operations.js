@@ -1,7 +1,7 @@
 import { getEtherPrice } from '../Modules/coinmarketcap'
 
-export const REFRESH_ETH_PRICE = 'REFRESH_ETH_PRICE'
-export const UPDATE_AMOUNT_TO_SEND = 'UPDATE_AMOUNT_TO_SEND'
+export const REFRESH_ETH_PRICE = 'ethops/REFRESH_ETH_PRICE'
+export const UPDATE_AMOUNT_TO_SEND = 'ethops/UPDATE_AMOUNT_TO_SEND'
 
 const initialState = {
   walletLimitUsd: 60,
