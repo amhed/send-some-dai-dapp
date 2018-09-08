@@ -64,12 +64,3 @@ export const wrapWeth = amount => {
     })
   }
 }
-
-export const executeNext = (state) => {
-  return dispatch => {
-    const operation = state.operationOrder[0]
-    if (state[])
-    dispatch({ type: QUEUE_UNSHIFT })
-    action()
-  }
-}
