@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^4.4.1",
-    "ethereum-blockies": "^0.1.1",
     "history": "^4.7.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
