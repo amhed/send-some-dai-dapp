@@ -1,10 +1,11 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Home from './home'
 import About from './about'
 import SendMoney from './send-money'
+import SignOut from './signout'
 
 const App = props => (
   <div className="App">
@@ -28,11 +29,12 @@ const App = props => (
       </div>
     </header>
 
-    <main>
+    <Switch>
       <Route exact path="/" component={Home} />
+      <Route exact path="/sign-out" component={SignOut} />
       <Route exact path="/send" component={SendMoney} /> 
       <Route exact path="/about" component={About} /> 
-    </main>
+    </Switch>
   </div>
 )
 

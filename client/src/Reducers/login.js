@@ -72,5 +72,7 @@ export const cancelLogin = () => {
     dispatch({
       type: CANCEL_LOGIN
     })
+
+    dispatch(push('/'))
   }
 }

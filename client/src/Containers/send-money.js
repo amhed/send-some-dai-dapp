@@ -1,20 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import { goToIndex } from '../Reducers/navigation'
 import LoggedInAccount from '../Components/LoggedInAccount'
 
 import '../Styles/send-money.css'
 
 class SendMoney extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     //force return to main screen if user not logged in
     console.log(this.props.accountAddress)
     if (this.props.accountAddress == null) {
-      window.location = '/'
+      this.props.goToIndex()
     }
   }
 
@@ -47,15 +45,13 @@ class SendMoney extends React.Component {
 //   accountAddress: login.accountAddress
 // })
 
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       login,
-//       cancelLogin,
-//       changePage: () => push('/about-us')
-//     },
-//     dispatch
-//   )
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      goToIndex
+    },
+    dispatch
+  )
 
 const mapStateToProps = ({ login }) => ({
   accountAddress: login.accountAddress
@@ -63,5 +59,5 @@ const mapStateToProps = ({ login }) => ({
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(SendMoney)
