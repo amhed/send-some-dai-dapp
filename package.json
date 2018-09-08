@@ -1,27 +1,15 @@
 {
-  "name": "send-some-dai-dapp",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "connected-react-router": "^4.4.1",
-    "history": "^4.7.2",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
-    "web3": "^1.0.0-beta.36"
-  },
+  "name": "send-some-dai-app-express",
+  "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   },
   "devDependencies": {
-    "eslint": "^5.5.0",
-    "eslint-plugin-react": "^7.11.1"
+    "concurrently": "^3.5.0"
   }
 }
