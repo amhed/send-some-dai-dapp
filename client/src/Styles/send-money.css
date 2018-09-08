@@ -1,0 +1,8 @@
+.send-money-grid {
+  width: 671px;
+  height: 285px;
+  display: inline-block;
+  border-radius: 10px;
+  background-image: linear-gradient(to left, #44507f, #596487);
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+}

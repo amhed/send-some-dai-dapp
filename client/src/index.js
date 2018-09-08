@@ -13,6 +13,7 @@ import App from './Containers/app-index'
 
 import './Styles/flexboxgrid.css'
 import './Styles/index.css'
+import './Styles/forms.css'
 
 const target = document.querySelector('#root')
 

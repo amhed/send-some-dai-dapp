@@ -1,0 +1,48 @@
+input {
+  width: 180px;
+  height: 68px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 1px #475c9c;
+  margin: 5px;
+
+  font-size: 30px;
+}
+
+.button-cta {
+  width: 325px;
+  height: 68px;
+  border-radius: 10px;
+  background-color: #10c0da;
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+  margin: 5px;
+
+  cursor: pointer;
+  font-size: 23px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.button-cta-narrow {
+  width: 225px;
+  height: 68px;
+  border-radius: 10px;
+  background-color: #10c0da;
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+  margin: 5px;
+
+  cursor: pointer;
+  font-size: 23px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+}

@@ -20,6 +20,8 @@ const LoggedInAccount = props => (
     <p>
       {props.accountAddress}
     </p>
+
+    <p>&nbsp;</p>
   </div>
 </div>
 )
