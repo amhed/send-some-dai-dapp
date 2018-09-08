@@ -56,12 +56,12 @@ export const login = () => {
       } else {
         console.log(`Success! Account ${account} logged in`)
         //TODO: Have to trigger call to server to verify login
+        dispatch(push('/send'))
+
         dispatch({
           type: LOGIN_SUCCESS,
           accountAddress: account
         })
-
-        dispatch(push('/send'))
       }
     })
   }   

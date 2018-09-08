@@ -9,6 +9,13 @@ input {
   font-size: 30px;
 }
 
+.currency-input {
+  text-align: right;
+  padding-right: 10px;
+  color: #8a8a8a;
+  font-weight: 200;
+}
+
 .button-cta {
   width: 325px;
   height: 68px;
@@ -45,4 +52,10 @@ input {
   letter-spacing: normal;
   text-align: center;
   color: #ffffff;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin-right: 0; 
 }
