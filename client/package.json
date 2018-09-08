@@ -9,6 +9,7 @@
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
@@ -24,5 +25,16 @@
     "eslint": "^5.5.0",
     "eslint-plugin-react": "^7.11.1"
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": {
+
+    "/sess": {
+      "target": "http://localhost:5000/"
+    },
+    "/ses": {
+      "target": "http://localhost:5000/"
+    },
+    "/api": {
+      "target": "http://localhost:5000/"
+    }
+  }
 }

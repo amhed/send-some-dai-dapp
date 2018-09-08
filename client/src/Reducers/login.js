@@ -37,33 +37,49 @@ export default (state = initialState, action) => {
   }
 }
 
+const sign = (nonce, account) => {
+  const web3 = window.web3 || {}
+  return new Promise((resolve, reject) => {
+    web3.personal.sign(web3.fromUtf8(nonce), account, (err, res) => {
+      if (err) return reject(err)
+      resolve(res)
+    })
+  })
+}
+
 export const login = () => {
   return async dispatch => {
     dispatch({
       type: REQUEST_LOGIN
     })
-
-    //TODO: generate nonce from server
-    const web3 = window.web3 || {}
-    const account = web3.eth.accounts[0]
-    const nonce = Math.floor(Math.random() * 1000).toString()
-
-    web3.personal.sign(web3.fromUtf8(nonce), account, (err, res) => {
-      if (err) {
-        dispatch({
-          type: CANCEL_LOGIN
-        })
-      } else {
-        console.log(`Success! Account ${account} logged in`)
-        //TODO: Have to trigger call to server to verify login
+    try {
+      const web3 = window.web3 || {}
+      const account = web3.eth.accounts[0]
+      const user = await fetch('/api/start-login/ed', {credentials: 'include'}).then(x => x.json())
+      if (user.loggedIn) {
         dispatch(push('/send'))
-
         dispatch({
           type: LOGIN_SUCCESS,
           accountAddress: account
         })
       }
-    })
+      const nonce = user.nonce
+      const signature = await sign(nonce, account)
+      const verification = await fetch(`/api/finish-login/ed?signature=${signature}&address=${account}`, {credentials: 'include'})
+        .then(x => x.json())
+      console.log(verification)
+      if (verification.loggedIn) {
+        dispatch(push('/send'))
+        dispatch({
+          type: LOGIN_SUCCESS,
+          accountAddress: account
+        })
+      }
+    } catch (e) {
+      dispatch({
+        type: CANCEL_LOGIN
+      })
+    }
   }   
 }
 
