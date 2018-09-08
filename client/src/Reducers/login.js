@@ -54,17 +54,21 @@ export const login = () => {
     dispatch({
       type: REQUEST_LOGIN
     })
+
     try {
       const web3 = window.web3 || {}
       const account = web3.eth.accounts[0]
       const user = await fetch('/api/start-login/' + account, {credentials: 'include'}).then(x => x.json())
       if (user.loggedIn) {
-        dispatch(push('/send'))
         dispatch({
           type: LOGIN_SUCCESS,
           accountAddress: account
         })
+        dispatch(push('/send'))
+
+        return
       }
+
       const nonce = user.nonce
       const signature = await sign(nonce, account)
       const verification = await fetch(`/api/finish-login/${account}?signature=${signature}`, {credentials: 'include'})
@@ -78,16 +82,18 @@ export const login = () => {
       }
     } catch (e) {
       dispatch({
-        type: CANCEL_LOGIN
+        type: CANCEL_LOGIN,
+        error: e
       })
     }
   }
 }
 
-export const cancelLogin = () => {
+export const cancelLogin = (error) => {
   return dispatch => {
     dispatch({
-      type: CANCEL_LOGIN
+      type: CANCEL_LOGIN,
+      error
     })
 
     dispatch(push('/'))
