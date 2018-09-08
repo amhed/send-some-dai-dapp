@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { login, cancelLogin } from '../Reducers/login'
 
-//TODO: Fetch to the server on load if user connected
 const Home = props => (
   <div>
     <img src="/img/send-money.png" alt="All you need is ETH" />
