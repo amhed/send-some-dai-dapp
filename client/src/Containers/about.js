@@ -41,7 +41,7 @@ export default () => (
         <div id="profile-pic-wrap">
           <ProfilePic name="amhed" handle="amhedh" url="http://www.twitter.com/amhedh"/>
           <ProfilePic name="ed" handle="esorribas" url="http://www.twitter.com/esorribas"/>
-          <ProfilePic name="andy" handle="branchandrew" url="https://www.linkedin.com/in/branchandrew/"/>
+          <ProfilePic name="andy" handle="andrewbranch" url="http://www.twitter.com/andrewbranch"/>
         </div>
       </div>
     </div>
