@@ -154,7 +154,6 @@ export default (state = initialState, action) => {
 }
 
 export const execute = (ethAmount, usdAmount) => {
-  console.log('amounts', ethAmount, usdAmount)
   return dispatch => {
     dispatch({ type: WETH_APPROVAL_STARTED })
 
