@@ -4,10 +4,14 @@ import '../Styles/about.css'
 
 const ProfilePic = props => (
     <div className='profile-pic-entry'>
-      <div className={`profile-pic ${props.name}`}>
-      </div>
+      <a href={props.url} target="_BLANK">
+        <div className={`profile-pic ${props.name}`}>
+        </div>
 
-      <span>{props.name}</span>
+        <span>
+          {props.handle}
+        </span>
+      </a>
     </div>
 )
 
@@ -29,19 +33,15 @@ export default () => (
         </p>
       </div>
       <div className="col-xs-3">
-        <h1>Contact Us</h1>
-        <p>
-          <a href="mailto:contact@sendsomedai.com">contact@sendsomedai.com</a>
-        </p>
       </div>
     </div>
 
     <div className="row">
       <div id="team-grid">
         <div id="profile-pic-wrap">
-          <ProfilePic name="amhed" />
-          <ProfilePic name="ed" />
-          <ProfilePic name="andy" />
+          <ProfilePic name="amhed" handle="amhedh" url="http://www.twitter.com/amhedh"/>
+          <ProfilePic name="ed" handle="esorribas" url="http://www.twitter.com/esorribas"/>
+          <ProfilePic name="andy" handle="branchandrew" url="https://www.linkedin.com/in/branchandrew/"/>
         </div>
       </div>
     </div>
