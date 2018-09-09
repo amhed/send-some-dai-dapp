@@ -160,10 +160,16 @@ export const execute = (ethAmount, usdAmount) => {
 
     oasis.checkApproval((err, approval) => {
       if (err) return dispatch({ type: WETH_APPROVAL_ERRORED })
-      if (approval) dispatch({ type: WETH_APPROVED })
+      if (approval) return onapprove()
+      oasis.approveWeth(onapprove)
+    })
+
+    function onapprove (err) {
+      if (err) return dispatch({ type: WETH_APPROVAL_ERRORED })
+      dispatch({ type: WETH_APPROVED })
       dispatch({ type: WETH_WRAPPING_STARTED })
       oasis.buyWeth(ethAmount, onbuy)
-    })
+    }
 
     function onbuy (err) {
       if (err) return dispatch({ type: WETH_WRAPPING_ERRORED })

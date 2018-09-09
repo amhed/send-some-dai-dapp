@@ -10,7 +10,6 @@ var weth = web3.eth.contract(erc20contract).at(wethAddress)
 var daiAddress = '0xc4375b7de8af5a38a93548eb8453a498222c4ff2'
 var dai = web3.eth.contract(erc20contract).at(daiAddress)
 
-
 exports.buyDai = function (amount, cb) {
   var transactionHash
   oasis.buyAllAmount.sendTransaction(daiAddress, amount, wethAddress, 500000000000000000000, {
@@ -31,15 +30,24 @@ exports.buyDai = function (amount, cb) {
   }
 }
 
-window.buyDai = exports.buyDai
-
-exports.approveWeth = function () {
+exports.approveWeth = function (cb) {
+  var transactionHash
   weth.approve.sendTransaction(oasisAddress, -1, {
     from: web3.eth.accounts[0],
     gas:4000000
-  }, function (err, res) {
-    console.log(err, res)
-  })
+  }, onsend)
+  
+  function onsend (err, _transactionHash) {
+    if (err) return cb(err)
+    transactionHash = _transactionHash
+    web3.eth.getTransaction(transactionHash, ontransaction)
+  }
+
+  function ontransaction (err, transaction) {
+    if (err) return cb(err)
+    if (transaction && transaction.blockNumber) return cb(null, transactionHash)
+    setTimeout(() => web3.eth.getTransaction(transactionHash, ontransaction), 1000)
+  }
 }
 
 exports.buyWeth = function (val, cb) {
@@ -63,8 +71,6 @@ exports.buyWeth = function (val, cb) {
   }
 }
 
-window.buyWeth = exports.buyWeth
-
 exports.transferDai = function (toAddr, amount, cb) {
   var transactionHash
   dai.transfer.sendTransaction(toAddr, amount, {
@@ -85,8 +91,10 @@ exports.transferDai = function (toAddr, amount, cb) {
   }
 }
 
-window.transferDai = exports.transferDai
-
 exports.checkApproval = function (cb) {
-  setTimeout(() => cb(null, true), 3000)
+  var event = weth.Approval({src: web3.eth.accounts[0]}, {fromBlock: 0, toBlock: 'latest'})
+  event.get(function (err, evts) {
+    if (err) return cb(err)
+    cb(null, !!evts.length)
+  })
 }
