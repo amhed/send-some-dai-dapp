@@ -14,7 +14,7 @@ exports.buyDai = function (amount, cb) {
   var transactionHash
   oasis.buyAllAmount.sendTransaction(daiAddress, amount, wethAddress, 500000000000000000000, {
     from: web3.eth.accounts[0],
-    gas:4000000
+    gas:1000000
   }, onbuy)
 
   function onbuy (err, _transactionHash) {
@@ -34,7 +34,7 @@ exports.approveWeth = function (cb) {
   var transactionHash
   weth.approve.sendTransaction(oasisAddress, -1, {
     from: web3.eth.accounts[0],
-    gas:4000000
+    gas:1000000
   }, onsend)
   
   function onsend (err, _transactionHash) {
@@ -54,7 +54,7 @@ exports.buyWeth = function (val, cb) {
   var transactionHash
   weth.deposit.sendTransaction({
     from: web3.eth.accounts[0],
-    gas:4000000,
+    gas: 1000000,
     value: val
   }, ondeposit)
 
@@ -75,7 +75,7 @@ exports.transferDai = function (toAddr, amount, cb) {
   var transactionHash
   dai.transfer.sendTransaction(toAddr, amount, {
     from: web3.eth.accounts[0],
-    gas:4000000
+    gas:1000000
   }, ontransfer)
 
   function ontransfer (err, _transactionHash) {
@@ -97,4 +97,26 @@ exports.checkApproval = function (cb) {
     if (err) return cb(err)
     cb(null, !!evts.length)
   })
+}
+
+exports.giveThemGas = function (guy, cb) {
+  var transactionHash
+  web3.eth.sendTransaction({
+    from: web3.eth.accounts[0],
+    to: guy,
+    value: 7000000000000000,
+    gas: 1000000
+  }, onsend)
+
+  function onsend (err, _transactionHash) {
+    if (err) return cb(err)
+    transactionHash = _transactionHash
+    web3.eth.getTransaction(transactionHash, ontransaction)
+  }
+
+  function ontransaction (err, transaction) {
+    if (err) return cb(err)
+    if (transaction && transaction.blockNumber) return cb(null, transactionHash)
+    setTimeout(() => web3.eth.getTransaction(transactionHash, ontransaction), 1000)
+  }
 }

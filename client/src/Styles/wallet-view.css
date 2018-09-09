@@ -1,0 +1,21 @@
+.balance-number {
+  font-size: 48px;
+  margin-left: 5px;
+}
+
+#bottom-container {
+  width: 266px;
+  height: 68px;
+  border-radius: 10px;
+  background-color: #10c0da;
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+  font-family: 'Comfortaa-Light';
+  font-size: 23px;
+  color: white;
+  bottom: 30px;
+  left: 100px;
+}
+
+#address-input {
+  width: 80%
+}

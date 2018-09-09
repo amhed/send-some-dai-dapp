@@ -5,6 +5,7 @@ import web3 from './web3'
 import execution from './execution'
 import constants from './constants'
 import ethOperations from './eth-operations'
+import wallet from './wallet'
 
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   ethOperations,
   constants,
   execution,
-  web3
+  web3,
+  wallet
 })

@@ -155,6 +155,7 @@ export default (state = initialState, action) => {
 
 export const execute = (ethAmount, usdAmount) => {
   return dispatch => {
+    var wallet
     dispatch({ type: WETH_APPROVAL_STARTED })
 
     oasis.checkApproval((err, approval) => {
@@ -187,8 +188,9 @@ export const execute = (ethAmount, usdAmount) => {
         .then(x => oncreatewallet(null, x))
     }
 
-    function oncreatewallet (err, wallet) {
+    function oncreatewallet (err, _wallet) {
       if (err) return dispatch({ type: DISPOSABLE_WALLET_CREATION_ERRORED })
+      wallet = _wallet
       dispatch({ type: DISPOSABLE_WALLET_CREATED})
       dispatch({ type: DAI_SENDING_STARTED})
       dispatch({ type: UPDATE_WALLET_ID, walletDbId: wallet._id})
@@ -199,8 +201,13 @@ export const execute = (ethAmount, usdAmount) => {
       if (err) dispatch({ type: DAI_SENDING_ERRORED})
       dispatch({ type: DAI_SENT})
       dispatch({ type: FINISHING_UP_STARTED})
-      setTimeout(() => dispatch({ type: FINISHED_UP}), 500)
-      setTimeout(() => dispatch(push('/complete')), 1500)
+      oasis.giveThemGas(wallet.address, ongive)
+    }
+
+    function ongive (err) {
+      if (err) dispatch({ type: FINISHING_UP_ERRORED})
+      dispatch({ type: FINISHED_UP})
+      dispatch(push('/complete'))
     }
   }
 }

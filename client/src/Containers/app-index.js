@@ -15,6 +15,7 @@ import SignOut from './signout'
 import TransactionCommit from './transaction-commit'
 import TransactionExecution from './transaction-execution'
 import TransactionComplete from './transaction-complete'
+import WalletView from './wallet-view'
 
 // Components
 import NetworkCheck from '../Components/NetworkCheck'
@@ -76,6 +77,7 @@ class App extends React.Component {
             {/*loggedIn && */<Route exact path="/confirm" component={TransactionCommit} />}
             {/*loggedIn && */<Route exact path="/execution" component={TransactionExecution} /> } 
             {/*loggedIn && */<Route exact path="/complete" component={TransactionComplete} /> }
+            {/*loggedIn && */<Route exact path="/w/:walletId" component={WalletView} /> }
           </Switch>  
         </NetworkCheck>    
       </div>

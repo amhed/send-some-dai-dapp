@@ -4,6 +4,12 @@ const mongojs = require('mongojs')
 const ethUtil = require('ethereumjs-util')
 const session = require('express-session')
 const wallet = require('ethereumjs-wallet')
+const Web3 = require('web3')
+const erc20 = require('./client/src/Modules/erc20contract.json')
+
+var web3 = new Web3(
+  new Web3.providers.HttpProvider('https://kovan.ethberl.in/')
+)
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -103,6 +109,50 @@ app.get('/api/create-disposable-wallet', (req, res) => {
   function oninsert (err, wlt) {
     if (err) return res.status(500).send({error: err})
     res.send(wlt)
+  }
+})
+
+app.get('/api/send-to/:walletId/:guy/:amount', (req, res) => {
+  db.disposableWallets.findOne({_id: mongojs.ObjectID(req.params.walletId)}, onwallet)
+
+  var dai = new web3.eth.Contract(erc20, '0xc4375b7de8af5a38a93548eb8453a498222c4ff2')
+
+  function onwallet (err, dbWallet) {
+    if (err) return res.status(500).send({error: err})
+    var acc = web3.eth.accounts.privateKeyToAccount(dbWallet.privKey)
+    web3.eth.accounts.wallet.add(acc)
+
+    dai.methods.transferFrom(dbWallet.address, req.params.guy, web3.utils.toWei(req.params.amount)).send({
+      from: dbWallet.address,
+      value: 0,
+      gas: 200000
+    }, onsend)
+  }
+
+  function onsend (err, transactionHash) {
+    console.log('ERROR', err)
+    if (err) return res.status(500).send({error: err})
+    res.send({transactionHash: transactionHash})
+  }
+})
+
+app.get('/api/balance/:walletId', (req, res) => {
+  db.disposableWallets.findOne({_id: mongojs.ObjectID(req.params.walletId)}, onwallet)
+
+  var dai = new web3.eth.Contract(erc20, '0xc4375b7de8af5a38a93548eb8453a498222c4ff2')
+
+  function onwallet (err, dbWallet) {
+    if (err) return res.status(500).send({error: err})
+    var acc = web3.eth.accounts.privateKeyToAccount(dbWallet.privKey)
+    web3.eth.accounts.wallet.add(acc)
+    console.log(web3.eth.accounts[0])
+
+    dai.methods.balanceOf(dbWallet.address).call(onbalance)
+  }
+
+  function onbalance (err, balance) {
+    if (err) return res.status(500).send({error: err})
+    res.send({balance: balance / (Math.pow(10, 18))})
   }
 })
 
