@@ -16,6 +16,26 @@
   left: 100px;
 }
 
+.transfer-done {
+  background-image: linear-gradient(to right, #a97fe5, #c579d2);
+  border-radius: 2px;
+  box-shadow: 25px 25px 54px 0 rgba(0, 0, 0, 0.28);
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  text-align: center;
+  font-family: Comfortaa;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  margin: 30px 70px;
+}
+
 #address-input {
   width: 80%
 }
