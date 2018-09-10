@@ -1,4 +1,4 @@
-import { contractAddresses } from '../../client-config'
+import { contractAddresses } from '../client-config'
 import oasisContractAbi from './odcontract.json'
 import erc20contractAbi from './erc20contract.json'
 

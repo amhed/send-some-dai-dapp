@@ -78,4 +78,4 @@ client/build
 
 # Secrets
 config.js
-client/client-config.js
+client/src/client-config.js

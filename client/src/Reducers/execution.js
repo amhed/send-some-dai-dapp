@@ -1,4 +1,4 @@
-import oasis from '../Modules/oasis-direct.js'
+import { approveWeth, buyDai, buyWeth, checkApproval, transferDai} from '../Modules/oasis-direct.js'
 import { push } from 'react-router-redux'
 
 export const WETH_APPROVAL_STARTED = 'execution/WETH_APPROVAL_STARTED'
@@ -157,24 +157,24 @@ export const execute = (ethAmount, usdAmount) => {
   return dispatch => {
     dispatch({ type: WETH_APPROVAL_STARTED })
 
-    oasis.checkApproval((err, approval) => {
+    checkApproval((err, approval) => {
       if (err) return dispatch({ type: WETH_APPROVAL_ERRORED })
       if (approval) return onapprove()
-      oasis.approveWeth(onapprove)
+      approveWeth(onapprove)
     })
 
     function onapprove (err) {
       if (err) return dispatch({ type: WETH_APPROVAL_ERRORED })
       dispatch({ type: WETH_APPROVED })
       dispatch({ type: WETH_WRAPPING_STARTED })
-      oasis.buyWeth(ethAmount, onbuy)
+      buyWeth(ethAmount, onbuy)
     }
 
     function onbuy (err) {
       if (err) return dispatch({ type: WETH_WRAPPING_ERRORED })
       dispatch({ type: WETH_WRAPPED })
       dispatch({ type: DAI_EXCHANGE_STARTED })
-      oasis.buyDai(usdAmount, onbuydai)
+      buyDai(usdAmount, onbuydai)
     }
 
     function onbuydai (err) {
@@ -192,7 +192,7 @@ export const execute = (ethAmount, usdAmount) => {
       dispatch({ type: DISPOSABLE_WALLET_CREATED})
       dispatch({ type: DAI_SENDING_STARTED})
       dispatch({ type: UPDATE_WALLET_ID, walletDbId: wallet._id})
-      oasis.transferDai(wallet.address, usdAmount, ontransfer)
+      transferDai(wallet.address, usdAmount, ontransfer)
     }
 
     function ontransfer (err) {
