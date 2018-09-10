@@ -1,16 +1,17 @@
 import { contractAddresses } from '../../client-config'
-const addresses = contractAddresses
+import oasisContractAbi from './odcontract.json'
+import erc20contractAbi from './erc20contract.json'
 
 const web3 = window.web3 || {}
-import oasisContractAbi from './odcontract.json'
-const oasis = web3.eth.contract(oasisContractAbi).at(addresses.oasis)
+const addresses = contractAddresses
 
-import erc20contractAbi from './erc20contract.json'
+const oasis = web3.eth.contract(oasisContractAbi).at(addresses.oasis)
 const weth = web3.eth.contract(erc20contractAbi).at(addresses.weth)
 const dai = web3.eth.contract(erc20contractAbi).at(addresses.weth)
 
 export function buyDai(amount, cb) {
   //TODO: use await instead? keeping track of variables is hard
+  //TODO: keep track of all transaction fees
   let transactionHash
   oasis.buyAllAmount.sendTransaction(
     addresses.dai,

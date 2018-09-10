@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mongodb: {
     connString: 'mongodb://user:pass@your-url.example.com:1234/db-name',
     collections: ['users', 'disposableWallets']
