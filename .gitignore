@@ -75,3 +75,7 @@ package-lock.json
 
 # Heroku build folder
 client/build
+
+# Secrets
+config.js
+client/client-config.js

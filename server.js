@@ -8,29 +8,28 @@ const wallet = require('ethereumjs-wallet')
 const app = express()
 const port = process.env.PORT || 5000
 
+const config = require('./config')
+
 const db = mongojs(
-  'mongodb://app:sendsomedai1@ds149732.mlab.com:49732/send-some-dai',
-  ['users', 'disposableWallets']
+  config.mongodb.connString,
+  config.mongodb.collections
 )
 
 app.use(session({
-  secret: 'my name is ed and I am awesome',
+  secret: config.express.sessionSecret,
   resave: false,
   saveUninitialized: true
 }))
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' })
-})
+//TODO: Amhed: Remove this, not needed?
+// app.get('/test-sess', (req, res) => {
+//   req.session.test = 'hey'
+//   res.send(req.session.test)
+// })
 
-app.get('/sess', (req, res) => {
-  req.session.test = 'hey'
-  res.send(req.session.test)
-})
-
-app.get('/ses', (req, res) => {
-  res.send(req.session.test)
-})
+// app.get('/ses', (req, res) => {
+//   res.send(req.session.test)
+// })
 
 app.get('/api/start-login/:address', (req, res) => {
   var randomNumber 
