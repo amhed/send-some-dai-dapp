@@ -2,18 +2,31 @@ import { contractAddresses } from '../client-config'
 import oasisContractAbi from './odcontract.json'
 import erc20contractAbi from './erc20contract.json'
 
-const web3 = window.web3 || {}
+const web3 = window.web3
 const addresses = contractAddresses
 
-const oasis = web3.eth.contract(oasisContractAbi).at(addresses.oasis)
-const weth = web3.eth.contract(erc20contractAbi).at(addresses.weth)
-const dai = web3.eth.contract(erc20contractAbi).at(addresses.weth)
+let _oasisContract, _wethContract, _daiContract
+const contracts = () => {
+  if (!web3) {
+    throw Error('Web3 is not present')
+  }
+
+  _oasisContract = _oasisContract || web3.eth.contract(oasisContractAbi).at(addresses.oasis)
+  _wethContract = _wethContract || web3.eth.contract(erc20contractAbi).at(addresses.weth)
+  _daiContract = _daiContract || web3.eth.contract(erc20contractAbi).at(addresses.weth)
+
+  return {
+    oasis: _oasisContract,
+    weth: _wethContract,
+    dai: _daiContract
+  }
+}
 
 export function buyDai(amount, cb) {
   //TODO: use await instead? keeping track of variables is hard
   //TODO: keep track of all transaction fees
   let transactionHash
-  oasis.buyAllAmount.sendTransaction(
+  contracts().oasis.buyAllAmount.sendTransaction(
     addresses.dai,
     amount,
     addresses.weth,
@@ -40,7 +53,7 @@ export function buyDai(amount, cb) {
 
 export function approveWeth(cb) {
   let transactionHash
-  weth.approve.sendTransaction(
+  contracts().weth.approve.sendTransaction(
     addresses.oasis,
     -1,
     {
@@ -65,7 +78,7 @@ export function approveWeth(cb) {
 
 export function buyWeth(val, cb) {
   let transactionHash
-  weth.deposit.sendTransaction(
+  contracts().weth.deposit.sendTransaction(
     {
       from: web3.eth.accounts[0],
       gas: 4000000,
@@ -89,7 +102,7 @@ export function buyWeth(val, cb) {
 
 export function transferDai(toAddr, amount, cb) {
   let transactionHash
-  dai.transfer.sendTransaction(
+  contracts().dai.transfer.sendTransaction(
     toAddr,
     amount,
     {
@@ -113,7 +126,7 @@ export function transferDai(toAddr, amount, cb) {
 }
 
 export function checkApproval(cb) {
-  const event = weth.Approval({ src: web3.eth.accounts[0] }, { fromBlock: 0, toBlock: 'latest' })
+  const event = contracts().weth.Approval({ src: web3.eth.accounts[0] }, { fromBlock: 0, toBlock: 'latest' })
 
   event.get((err, evts) => (err ? cb(err) : cb(null, !!evts.length)))
 }
